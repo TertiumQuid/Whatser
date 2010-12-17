@@ -1,19 +1,145 @@
-= hondius
+= Hondius
 
-Description goes here.
+Also known as the 'SoGeo API', Hondius is a simple Ruby / Rails wrapper for interacting with SoGeo's location-based web services (see http://docs.sogeoapi.com for more details).
 
-== Contributing to hondius
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+== Overview
+
+* read/write API access
+* OAuth 2 authentication (using oauth2)
+* network connectivity (using httparty)
+* ActiveModel-like syntax for API resource classes (spots, media, reviews, check ins, etc.)
+* user spot collection management
+* social network integration (facebook, twitter, foursquare, gowalla)
+* photo uploads
+
+== Usage
+
+### 0. Register your application with the SoGeo API
+
+In order to use Hondius, you'll need to register for a SoGeo user account (https://production-2.sogeoapi.com/oauth/user/new), and create a client application for that user, which will then give you an application key and secret (https://production-2.sogeoapi.com/oauth/user/client_applications/new).
+
+Once you have your key and secret, you can start using the gem by instantiating a Hondius client with those credentials.
+
+### 1. Instantiate a Client (on demand or with default configuration)
+
+    client = SoGeo::Hondius::Client.new(:api_key => 'key', :api_secret => 'secret', :oauth_token => '123abc')
+
+or...
+
+    SoGeo::Hondius::Client.configure do |config|
+      config.api_key = 'key'
+      config.api_secret = 'secret'
+    end
+    client1 = SoGeo::Hondius::Client.new( :oauth_token => '123abc' )
+    client2 = SoGeo::Hondius::Client.new( :oauth_token => '789xyz' )
+
+### 2. Authenticate a User
+
+Nearly every API call must be performed in the context of a user, and users authenticate with the API by using an oauth token.
+
+If you don't already have an oauth token for your user, you can get one by following the standard OAuth 2 web server flow (http://tools.ietf.org/html/draft-ietf-oauth-v2-10).
+
+First, redirect your user to the SoGeo website where they will be presented with a login screen and a dialog to authorize your application to access their SoGeo account. In a Rails controller, the command would likely look as follows. e.g.
+
+    redirect_to SoGeo::Hondius.client.oauth_authorize_url( :redirect_uri => 'https://example.com/callback' )
+
+Second, you'll need a controller action on your web app to which the SoGeo API will redirect the user after they complete the authorization process. Within this action, you'll need to capture the access token parameter and use to obtain a user oauth token, after which the authorization will be complete, and you may begin accessing the API with your user. e.g.
+
+    def oauth_callback
+      code = params[:access_token]
+      session[:oauth_token] = SoGeo::Hondius.client.get_oauth_token(code, :redirect_uri => 'https://example.com/callback').token
+    end
+
+Note, you should store your user's oauth token so it can be used to instantiate Hondius client sessions as needed.
+
+### 3. Access the API
+
+Once you have an oauth token for a user, you can access the SoGeo API by instantiating a Hondius client and making calls using the Hondius resource classes. e.g.
+
+    client = SoGeo::Hondius::Client.new( :oauth_token => '123abc' )
+    authenticated_user = client.user.me
+    spots = client.spots.search(:geo => "52.3665312,4.8931739", :text => "pizza", :per_page => 30).data
+    a_spot = client.spots.find(12345).data
+    my_spot = client.spots.create(:name => 'work', :street => 'main street', 'city' => 'metropolis').data
+    new_spot = client.spots.new(:name => 'work', :street => 'main street', 'city' => 'metropolis')
+    new_spot.save
+    new_spot.delete
+
+Responses from the API are wrapped in the Hondius::Response class, allowing you to inspect the detailed results of your API requests, e.g.
+
+    client = SoGeo::Hondius::Client.new( :oauth_token => '123abc' )
+    results = client.spots.search(:geo => "52.3665312,4.8931739", :text => "pizza", :per_page => 30)
+    results.http_status
+    results.error.blank?
+    results.error_description
+    results.data
+
+== Resource Guide
+
+### Users
+
+The API stores user profiles, which may have originated either directly from API registration, or else by connecting through a social network. In order to access the API on behalf of a user, you'll need an oauth token representing that user's credentials.
+
+    SoGeo::Hondius.client.users.me
+    SoGeo::Hondius.client.users.search( :text => 'name or email', :page => 1, :per_page => 10 )
+    SoGeo::Hondius.client.users.find( user_id )
+    SoGeo::Hondius.client.users.create( params[:user] )
+
+### Spots (Points of Interest)
+
+A spot is a named geographical location and the most fundamental kind of content in the API. Typically with counterparts in Gowalla or Foursquare, spots have various associated content such as photos or tags.  
+
+    SoGeo::Hondius.client.spots.suggested( :page => 1, :per_page => 10 )
+    SoGeo::Hondius.client.spots.search( :geo => "52.3665312,4.8931739" )
+    SoGeo::Hondius.client.spots.find( spot_id )
+    SoGeo::Hondius.client.spots.create( params[:spot] )
+    m = SoGeo::Hondius.client.spots.new( params[:spot] )
+    m.save
+    m.delete
+
+### Reviews
+
+A review is a short- to long-form text article about a spot.
+
+    SoGeo::Hondius.client.reviews.list( spot_id, :page => 1, :per_page => 10 )
+    SoGeo::Hondius.client.reviews.find( spot_id, review_id )
+    SoGeo::Hondius.client.reviews.create( spot_id, params[:review] )
+    m = SoGeo::Hondius.client.reviews.new( params[:review] )
+    m.save
+    m.delete
+
+### Details
+
+Details are miscellaneous, freeform information about a spot, such as operating hours, pricing, etc.
+
+    SoGeo::Hondius.client.details.list( spot_id, :page => 1, :per_page => 10 )
+    SoGeo::Hondius.client.details.find( spot_id, details_id )
+    SoGeo::Hondius.client.details.create( spot_id, params[:details] )
+    m = SoGeo::Hondius.client.details.new( params[:details] )
+    m.save
+    m.delete
+
+### Tags
+
+Tags are freeform text that reflect user thoughts, opinions, and feedback on specific spots.
+
+    SoGeo::Hondius.client.tags.list( spot_id )
+    SoGeo::Hondius.client.tags.create( spot_id, params[:tag] )
+    m = SoGeo::Hondius.client.tags.new( params[:tag] )
+    m.save
+    m.delete
+
+
+== Contact
+
+Developer Email: travis@sogeocompany.com
+API Documentation: http://docs.sogeoapi.com
+Facebook: http://www.facebook.com/sogeo
+Whatser: http://www.whatser.com
+Twitter: @sogeoapi
 
 == Copyright
 
-Copyright (c) 2010 Travis Dunn. See LICENSE.txt for
+Copyright (c) 2010 Travis Dunn / SoGeo Company. See LICENSE.txt for
 further details.
 
