@@ -1,6 +1,4 @@
-module SoGeo
-  module Hondius
-    # Base error class for rescuing from all SoGeo API errors
-    class Error < StandardError; end
-  end
+module Whatser
+  # Base error class for rescuing from all Whatser API errors
+  class Error < StandardError; end
 end

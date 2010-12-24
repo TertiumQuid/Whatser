@@ -12,10 +12,10 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "hondius"
+  gem.name = "whatser"
   gem.homepage = "http://github.com/TertiumQuid/hondius"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
+  gem.summary = %Q{An HTTP and model DSL wrapper for the Whatser API}
   gem.description = %Q{TODO: longer description of your gem}
   gem.email = "cmd@travisdunn.com"
   gem.authors = ["Travis Dunn"]
@@ -47,7 +47,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "hondius #{version}"
+  rdoc.title = "whatser #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

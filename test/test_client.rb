@@ -2,15 +2,15 @@ require 'helper'
 
 class TestClient < Test::Unit::TestCase
   def test_attr_accessor
-    client = SoGeo::Hondius::Client.new
-    SoGeo::Hondius::Configuration::VALID_OPTIONS_KEYS.each do |a|
+    client = Whatser::Client.new
+    Whatser::Configuration::VALID_OPTIONS_KEYS.each do |a|
       assert client.respond_to?(a)
     end
   end
   
   def test_cattr_accessor
-    SoGeo::Hondius::Configuration::VALID_OPTIONS_KEYS.each do |a|
-      assert SoGeo::Hondius::Client.respond_to?(a)
+    Whatser::Configuration::VALID_OPTIONS_KEYS.each do |a|
+      assert Whatser::Client.respond_to?(a)
     end
   end  
   
@@ -22,7 +22,7 @@ class TestClient < Test::Unit::TestCase
               :username => 'test@example.com', 
               :password => 'test'}
               
-    client = SoGeo::Hondius::Client.new( params )
+    client = Whatser::Client.new( params )
     assert_equal params[:api_key], client.api_key
     assert_equal params[:api_secret], client.api_secret
     assert_equal params[:username], client.username
@@ -30,28 +30,33 @@ class TestClient < Test::Unit::TestCase
   end
   
   def test_initialize_with_configure_defaults
-    SoGeo::Hondius::Client.configure do |config|
+    Whatser::Client.configure do |config|
       config.api_key = 'key'
       config.api_secret = 'secret'
       config.oauth_token = '123abc'
     end
-    client = SoGeo::Hondius::Client.new  
+    client = Whatser::Client.new  
     assert_equal 'key', client.api_key
     assert_equal 'secret', client.api_secret
     assert_equal '123abc', client.oauth_token
   end
   
   def test_resources
-    client = SoGeo::Hondius::Client.new
-    assert_equal SoGeo::Hondius::CheckIn, client.check_ins
-    assert_equal SoGeo::Hondius::Collection, client.collections
-    assert_equal SoGeo::Hondius::DataSource, client.data_sources
-    assert_equal SoGeo::Hondius::Detail, client.details
-    assert_equal SoGeo::Hondius::Media, client.media
-    assert_equal SoGeo::Hondius::Poi, client.spots
-    assert_equal SoGeo::Hondius::Subscription, client.subscriptions
-    assert_equal SoGeo::Hondius::Tag, client.tags
-    assert_equal SoGeo::Hondius::User, client.users    
+    client = Whatser::Client.new
+    assert_equal Whatser::CheckIn, client.check_ins
+    assert_equal Whatser::Collection, client.collections
+    assert_equal Whatser::DataSource, client.data_sources
+    assert_equal Whatser::Detail, client.details
+    assert_equal Whatser::Media, client.media
+    assert_equal Whatser::Poi, client.spots
+    assert_equal Whatser::Subscription, client.subscriptions
+    assert_equal Whatser::Tag, client.tags
+    assert_equal Whatser::User, client.users    
+    assert_equal Whatser::Follow, client.follows
+    assert_equal Whatser::Facebook, client.facebook
+    assert_equal Whatser::Foursquare, client.foursquare
+    assert_equal Whatser::Gowalla, client.gowalla
+    assert_equal Whatser::Twitter, client.twitter
     
     assert_equal client, client.check_ins.client
     assert_equal client, client.collections.client
@@ -62,5 +67,10 @@ class TestClient < Test::Unit::TestCase
     assert_equal client, client.subscriptions.client
     assert_equal client, client.tags.client
     assert_equal client, client.users.client
+    assert_equal client, client.follows.client
+    assert_equal client, client.facebook.client
+    assert_equal client, client.foursquare.client
+    assert_equal client, client.gowalla.client
+    assert_equal client, client.twitter.client
   end
 end

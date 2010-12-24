@@ -1,44 +1,49 @@
-module SoGeo
-  module Hondius
-    class Client
-      ['net','client','api'].each do |p| 
-        Dir[File.expand_path("/#{p}/*.rb", __FILE__)].each{|f| require f} 
-      end
+module Whatser
+  class Client
+    ['net','client','api'].each do |p| 
+      Dir[File.expand_path("/#{p}/*.rb", __FILE__)].each{|f| require f} 
+    end
 
-      class << self      
-        attr_accessor *SoGeo::Hondius::Configuration::VALID_OPTIONS_KEYS
-        
-        def configure
-          yield self
-          true
+    class << self      
+      attr_accessor *Whatser::Configuration::VALID_OPTIONS_KEYS
+      
+      def configure
+        yield self
+        true
+      end
+    end
+    
+    attr_accessor  *Whatser::Configuration::VALID_OPTIONS_KEYS
+    def initialize(options={})
+      Whatser::Configuration::VALID_OPTIONS_KEYS.each do |key|
+        if options[key].blank?
+          send("#{key}=", self.class.send(key) )
+        else  
+          send("#{key}=", options[key])
         end
       end
-      
-      attr_accessor  *SoGeo::Hondius::Configuration::VALID_OPTIONS_KEYS
-      def initialize(options={})
-        SoGeo::Hondius::Configuration::VALID_OPTIONS_KEYS.each do |key|
-          if options[key].blank?
-            send("#{key}=", self.class.send(key) )
-          else  
-            send("#{key}=", options[key])
-          end
-        end
-      end
-      
-      def check_ins; SoGeo::Hondius::CheckIn.set(self); end
-      def collections; SoGeo::Hondius::Collection.set(self); end
-      def data_sources; SoGeo::Hondius::DataSource.set(self); end
-      def details; SoGeo::Hondius::Detail.set(self); end
-      def media; SoGeo::Hondius::Media.set(self); end
-      def spots; SoGeo::Hondius::Poi.set(self); end
-      def users; SoGeo::Hondius::User.set(self); end
-      def reviews; SoGeo::Hondius::Review.set(self); end
-      def subscriptions; SoGeo::Hondius::Subscription.set(self); end
-      def tags; SoGeo::Hondius::Tag.set(self); end
-   
-      include SoGeo::Hondius::Configuration   
-      include SoGeo::Hondius::Http
-      include SoGeo::Hondius::OAuth
-    end   
-  end
+    end
+    
+    def check_ins; Whatser::CheckIn.set(self); end
+    def collections; Whatser::Collection.set(self); end
+    def data_sources; Whatser::DataSource.set(self); end
+    def details; Whatser::Detail.set(self); end
+    def media; Whatser::Media.set(self); end
+    def spots; Whatser::Poi.set(self); end
+    def users; Whatser::User.set(self); end
+    def follows; Whatser::Follow.set(self); end
+    def reviews; Whatser::Review.set(self); end
+    def subscriptions; Whatser::Subscription.set(self); end
+    def tags; Whatser::Tag.set(self); end
+    def cities; Whatser::City.set(self); end
+    
+    def facebook; Whatser::Facebook.set(self); end
+    def foursquare; Whatser::Foursquare.set(self); end
+    def gowalla; Whatser::Gowalla.set(self); end
+    def twitter; Whatser::Twitter.set(self); end                        
+ 
+    include Whatser::Configuration   
+    include Whatser::Http
+    include Whatser::OAuth
+  end   
 end

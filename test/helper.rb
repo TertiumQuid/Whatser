@@ -16,12 +16,10 @@ require 'hondius'
 class Test::Unit::TestCase
 end
 
-module SoGeo
-  module Hondius
-    module Http
-      def request(verb, path, options={})
-        SoGeo::Hondius::Response.new('')
-      end
+module Whatser
+  module Http
+    def request(verb, path, options={})
+      Whatser::Response.new('')
     end
   end
 end

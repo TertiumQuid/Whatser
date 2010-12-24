@@ -2,7 +2,7 @@ require 'helper'
 
 class TestPoi < Test::Unit::TestCase
   def test_to_params
-    poi = SoGeo::Hondius::Poi.new
+    poi = Whatser::Poi.new
     params = [:name,:lat,:lng,:street,:district,:region,:city,:postal_code,:country]
     params.each do |p|
       assert poi.to_params.keys.include?(p)
@@ -10,15 +10,15 @@ class TestPoi < Test::Unit::TestCase
   end
   
   def test_suggested
-    client = SoGeo::Hondius::Client.new
-    assert client.spots.suggested(:opt => 'test').is_a?(SoGeo::Hondius::Response)
+    client = Whatser::Client.new
+    assert client.spots.suggested(:opt => 'test').is_a?(Whatser::Response)
   end
   
   def test_from_hash_to_model
     hash = {'id' => 1, 'name' => 'test', 'lat' => 1, 'lng' => 1, 'street' => 'test', 
             'district' => 'test', 'region' => 'test', 'city' => 'test', 'postal_code' => '1', 'country' => 'test'}
-    poi = SoGeo::Hondius::Poi.from_hash_to_model(hash)
-    assert poi.is_a?(SoGeo::Hondius::Poi)
+    poi = Whatser::Poi.from_hash_to_model(hash)
+    assert poi.is_a?(Whatser::Poi)
     
     assert_equal hash['id'], poi.id
     assert_equal hash['name'], poi.name

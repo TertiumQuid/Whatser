@@ -9,6 +9,7 @@ require File.expand_path('../hondius/errors', __FILE__)
 require File.expand_path('../hondius/api/response', __FILE__)
 
 require File.expand_path('../hondius/resources/resource', __FILE__)
+require File.expand_path('../hondius/resources/city', __FILE__)
 require File.expand_path('../hondius/resources/check_in', __FILE__)
 require File.expand_path('../hondius/resources/collection', __FILE__)
 require File.expand_path('../hondius/resources/data_source', __FILE__)
@@ -19,13 +20,18 @@ require File.expand_path('../hondius/resources/review', __FILE__)
 require File.expand_path('../hondius/resources/subscription', __FILE__)
 require File.expand_path('../hondius/resources/tag', __FILE__)
 require File.expand_path('../hondius/resources/user', __FILE__)
+require File.expand_path('../hondius/resources/follow', __FILE__)
 
-module SoGeo
-  module Hondius
-    class << self  
-      def client(options={})
-        @client ||= SoGeo::Hondius::Client.new(options)
-      end
-    end   
-  end
+require File.expand_path('../hondius/api/service', __FILE__)
+require File.expand_path('../hondius/api/facebook', __FILE__)
+require File.expand_path('../hondius/api/foursquare', __FILE__)
+require File.expand_path('../hondius/api/twitter', __FILE__)
+require File.expand_path('../hondius/api/gowalla', __FILE__)
+
+module Whatser
+  class << self  
+    def client(options={})
+      @client ||= Whatser::Client.new(options)
+    end
+  end   
 end
