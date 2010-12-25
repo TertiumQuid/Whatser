@@ -4,10 +4,15 @@ module Whatser
     attr_accessor :name,:twitter_name,:avatar_pic,:location,:bio,:email
     attr_accessor :last_login_at,:promoted,:premium,:collections_count
     attr_writer   :avatar,:remote_avatar,:password,:lat,:lng
+    attr_writer   :access_tokens
     
     class << self
       def me
         api_request :get, "/api/users/me"
+      end
+      
+      def anonymous(opts={})
+        api_request :get, "/api/users/anonymous", {:query => opts}
       end
       
       def search(opts={})
@@ -26,8 +31,8 @@ module Whatser
         api_request :post, "/api/invites", {:query => emails}
       end
               
-      def create(opts={})
-        api_request :post, "/api/users", {:body => {'user' => opts} }, :auth => :key
+      def create(params={})
+        api_request :post, "/api/users", {:body => {'user' => params} }, :auth => :key
       end        
     end      
 
