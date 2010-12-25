@@ -22,6 +22,12 @@ Once you have your key and secret, you can start using the gem by instantiating 
 
 === 1. Instantiate a Client (on demand or with default configuration)
 
+Declare Whatser in your Gemfile:
+
+    gem 'whatser', :git => "git@github.com:sogeo/whatser"
+
+And instantiate a Whatser client as need:
+
     client = Whatser::Client.new(:api_key => 'key', :api_secret => 'secret', :oauth_token => '123abc')
 
 or...
@@ -278,11 +284,11 @@ You can use convenience methods on users and spots to determine their connection
 
 == Contact
 
-Developer Email: travis@sogeocompany.com
-API Documentation: http://docs.sogeoapi.com
-Facebook: http://www.facebook.com/sogeo
-Whatser: http://www.whatser.com
-Twitter: @sogeoapi
++ Developer Email: travis@sogeocompany.com
++ API Documentation: http://docs.sogeoapi.com
++ Facebook: http://www.facebook.com/sogeo
++ Whatser: http://www.whatser.com
++ Twitter: @sogeoapi
 
 == Copyright
 
