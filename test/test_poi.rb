@@ -1,6 +1,11 @@
 require 'helper'
 
 class TestPoi < Test::Unit::TestCase
+  def setup
+    @client = Whatser::Client.new
+    @poi = Whatser::Poi.new
+  end
+  
   def test_to_params
     poi = Whatser::Poi.new
     params = [:name,:lat,:lng,:street,:district,:region,:city,:postal_code,:country]
@@ -10,9 +15,24 @@ class TestPoi < Test::Unit::TestCase
   end
   
   def test_suggested
-    client = Whatser::Client.new
-    assert client.spots.suggested(:opt => 'test').is_a?(Whatser::Response)
+    assert @client.spots.suggested(:opt => 'test').is_a?(Whatser::Response)
   end
+  
+  def test_search
+    assert @client.spots.search(:opt => 'test').is_a?(Whatser::Response)
+  end  
+  
+  def test_find
+    assert @client.spots.find(1, :opt => 'test').is_a?(Whatser::Response)
+  end
+  
+  def test_create
+    assert @client.spots.create(:name => 'test', :lat => 45, :lng => 45).is_a?(Whatser::Response)
+  end
+  
+  def test_delete
+    assert @client.spots.delete(1).is_a?(Whatser::Response)
+  end    
   
   def test_from_hash_to_model
     hash = {'id' => 1, 'name' => 'test', 'lat' => 1, 'lng' => 1, 'street' => 'test', 
@@ -31,4 +51,16 @@ class TestPoi < Test::Unit::TestCase
     assert_equal hash['postal_code'], poi.postal_code
     assert_equal hash['country'], poi.country
   end
+  
+  def foursquare_connected
+    assert_equal false, @poi.foursquare_connected?
+    @poi.foursquare_id = 1
+    assert_equal true, @poi.foursquare_connected?
+  end
+  
+  def gowalla_connected
+    assert_equal false, @poi.foursquare_connected?
+    @poi.foursquare_id = 1
+    assert_equal true, @poi.foursquare_connected?
+  end  
 end

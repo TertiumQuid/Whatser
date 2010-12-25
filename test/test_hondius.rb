@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestHondius < Test::Unit::TestCase
+class TestWhatser < Test::Unit::TestCase
   def test_client
     assert Whatser.client.is_a?( Whatser::Client )
   end
