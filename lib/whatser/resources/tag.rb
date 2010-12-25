@@ -18,15 +18,11 @@ module Whatser
     end
     
     def save
-      if id.blank?
-        Whatser::Tag.create(poi_id, name)
-      else
-        api_request :put, "/api/poi/#{poi_id}/tags/#{id}", {:body => {'tagging' => to_params} }
-      end
+      self.class.create(poi_id, name)
     end
     
     def delete
-      Whatser::Tag.delete(poi_id, name)
+      self.class.delete(poi_id, name)
     end
     
     def to_params

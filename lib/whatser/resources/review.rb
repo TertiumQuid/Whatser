@@ -23,7 +23,7 @@ module Whatser
     
     def save
       if id.blank?
-        Whatser::Review.create(poi_id, to_params)
+        self.class.create(poi_id, to_params)
       else
         api_request :put, "/api/poi/#{poi_id}/reviews/#{id}", {:body => {'review' => to_params} }
       end
