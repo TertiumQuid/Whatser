@@ -58,13 +58,14 @@ Gem::Specification.new do |s|
     "test/test_facebook.rb",
     "test/test_foursquare.rb",
     "test/test_gowalla.rb",
-    "test/test_whatser.rb",
+    "test/test_hondius.rb",
     "test/test_http.rb",
     "test/test_oauth.rb",
     "test/test_poi.rb",
     "test/test_resource.rb",
     "test/test_response.rb",
-    "test/test_twitter.rb"
+    "test/test_twitter.rb",
+    "whatser.gemspec"
   ]
   s.homepage = %q{http://github.com/sogeo/whatser}
   s.licenses = ["MIT"]
@@ -80,7 +81,7 @@ Gem::Specification.new do |s|
     "test/test_facebook.rb",
     "test/test_foursquare.rb",
     "test/test_gowalla.rb",
-    "test/test_whatser.rb",
+    "test/test_hondius.rb",
     "test/test_http.rb",
     "test/test_oauth.rb",
     "test/test_poi.rb",
