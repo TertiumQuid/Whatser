@@ -6,7 +6,19 @@ class TestDataSource < Test::Unit::TestCase
   end
   
   def test_list
-    assert @client.check_ins.list(:page => 1).is_a?(Whatser::Response)
+    assert @client.data_sources.list(:page => 1).is_a?(Whatser::Response)
+  end
+  
+  def test_for_users_with_id
+    assert @client.data_sources.for_users(1, :page => 1).is_a?(Whatser::Response)
+  end  
+
+  def test_for_users_with_string
+    assert @client.data_sources.for_users('1,2,3', :page => 1).is_a?(Whatser::Response)
+  end  
+
+  def test_for_users_with_array
+    assert @client.data_sources.for_users([1,2,3], :page => 1).is_a?(Whatser::Response)
   end
     
   def test_subscription_url

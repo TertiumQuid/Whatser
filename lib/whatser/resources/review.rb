@@ -30,7 +30,7 @@ module Whatser
     end           
     
     def delete
-      Whatser::Review.delete(poi_id, id)
+      self.class.delete(poi_id, id)
     end       
     
     def to_params

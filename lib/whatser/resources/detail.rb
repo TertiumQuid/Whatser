@@ -23,14 +23,14 @@ module Whatser
     
     def save
       if id.blank?
-        Whatser::Detail.create(poi_id, to_params)
+        self.class.create(poi_id, to_params)
       else
         api_request :put, "/api/poi/#{poi_id}/details/#{id}", {:body => {'detail' => to_params} }
       end
     end           
     
     def delete
-      Whatser::Detail.delete(poi_id, id)
+      self.class.delete(poi_id, id)
     end       
     
     def to_params

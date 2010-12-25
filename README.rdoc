@@ -238,7 +238,7 @@ A check in represents a user's visit to a spot, and will typically have a counte
 A data source represents a free or purchasable content stream of collected spots, media, and reviews. Users can subscribe to data sources in order to access their content in Whatser. To begin the subscription and payment process, redirect your user to the data source's subscription_url.
 
     Whatser.client.data_sources.list( :page => 1, :per_page => 10 )
-    Whatser.client.data_sources.list( :user_id => '101,23', :page => 1, :per_page => 10 )
+    Whatser.client.data_sources.for_users( :user_id => [101,23], :page => 1, :per_page => 10 )
     m = Whatser.client.data_sources.find( 1 )
     redirect_to m.subscription_url(:display => 'touch')
 

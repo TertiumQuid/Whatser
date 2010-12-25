@@ -17,6 +17,10 @@ module Whatser
       def create(user_id, opts={})
         api_request :post, "/api/follows/#{user_id}", {:query => opts, :body => ''}
       end
+
+      def delete(user_id)
+        api_request :delete, "/api/follows/#{user_id}"
+      end
       
       def ignore(user_id)
         api_request :delete, "/api/follows/#{user_id}"
@@ -28,11 +32,11 @@ module Whatser
     end
     
     def save
-      self.class.create( follow_id )
+      self.class.create( id )
     end      
     
     def delete
-      self.class.ignore( follow_id )
+      self.class.ignore( id )
     end
   end
 end
