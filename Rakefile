@@ -16,7 +16,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/sogeo/whatser"
   gem.license = "MIT"
   gem.summary = %Q{An HTTP and model DSL wrapper for the Whatser API}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with Whatser's location-based web services (see http://docs.sogeoapi.com for more details).}
   gem.email = "cmd@travisdunn.com"
   gem.authors = ["Travis Dunn"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
