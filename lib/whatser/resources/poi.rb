@@ -28,7 +28,7 @@ module Whatser
     
     def save
       if id.blank?
-        Whatser::Poi.create(id, to_params)
+        Whatser::Poi.create(to_params)
       else
         api_request :put, "/api/poi/#{id}", {:body => {'poi' => to_params} }
       end

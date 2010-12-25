@@ -14,13 +14,13 @@ The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with What
 
 == Usage
 
-### 0. Register your application with the Whatser API
+=== 0. Register your application with the Whatser API
 
 In order to use the Whatser Gem, you'll need to register for a Whatser user account (https://production-2.sogeoapi.com/oauth/user/new), and create a client application for that user which will then give you an application key and secret (https://production-2.sogeoapi.com/oauth/user/client_applications/new).
 
 Once you have your key and secret, you can start using the gem by instantiating a Whatser client with those credentials:
 
-### 1. Instantiate a Client (on demand or with default configuration)
+=== 1. Instantiate a Client (on demand or with default configuration)
 
     client = Whatser::Client.new(:api_key => 'key', :api_secret => 'secret', :oauth_token => '123abc')
 
@@ -33,7 +33,7 @@ or...
     client1 = Whatser::Client.new( :oauth_token => '123abc' )
     client2 = Whatser::Client.new( :oauth_token => '789xyz' )
 
-### 2. Authenticate a User
+=== 2. Authenticate a User
 
 Nearly every API call must be performed in the context of a user, and users authenticate with the API by using an oauth token.
 
@@ -52,7 +52,7 @@ Second, you'll need a controller action on your web app to which the Whatser API
 
 Note, you should store your user's oauth token so it can be used to instantiate Whatser client sessions as needed.
 
-### 3. Access the API
+=== 3. Access the API
 
 Once you have an oauth token for a user, you can access the Whatser API by instantiating a Whatser client and making calls using the Whatser resource classes. e.g.
 
@@ -90,7 +90,7 @@ You can use the Response helpers to easily inspect your the result of your reque
 
 == Resource Guide
 
-### Users
+=== Users
 
 The API stores user profiles, which may have originated either directly from API registration, or else by connecting through a social network. In order to access the API on behalf of a user, you'll need an oauth token representing that user's credentials.
 
@@ -105,7 +105,7 @@ The API stores user profiles, which may have originated either directly from API
     <Whatser::User @bio="Example", @location="Amsterdam, NL", @facebook_id="1234567890", @email="user@example.com", @gowalla_id="1234567890", @avatar_pic="http://example.com/img/14.jpg", @promoted=false, @name="User", @twitter_name="example", @last_login_at="2010-12-24T16:46:23Z", @twitter_id="1234567890", @id=101, @foursquare_id="1234567890">
 
 
-### Spots (Points of Interest)
+=== Spots (Points of Interest)
 
 A spot is a named geographical location and the most fundamental kind of content in the API. Typically with counterparts in Gowalla or Foursquare, spots have various associated content such as photos or tags. If you supply only the lat and lng, or only the address, the spot will be automatically geocoded/reverse geocoded appropriately.
 
@@ -121,7 +121,7 @@ A spot is a named geographical location and the most fundamental kind of content
     <Whatser::Poi @lng=4.0, @region="Noord Holland", @gowalla_id="123456", @lat=52.0, @tag_list=nil, @city="Amsterdam", @name="Example Spot", @country="Netherlands", @street="example street", @id=101, @postal_code="1012", @foursquare_id="123456", @created_at="2010-12-24T16:46:23Z">
 
 
-### Collections
+=== Collections
 
 A collection is a set of spots of particular interest to a user. By adding spots to their personal collection, users build a list of their favorite locations around a city.
 
@@ -131,7 +131,7 @@ A collection is a set of spots of particular interest to a user. By adding spots
     <Whatser::Collection @data=[#<Whatser::Poi>, #<Whatser::Poi>], @city_name="Amsterdam", @city=["Amsterdam"]>
 
 
-### Cities
+=== Cities
 
 A user's cities represent the cities in which they have collected spots.
 
@@ -141,7 +141,7 @@ A user's cities represent the cities in which they have collected spots.
     <Whatser::City @count=5, @name="Amsterdam">
 
 
-### Reviews
+=== Reviews
 
 A review is a short- to long-form text article about a spot.
 
@@ -156,7 +156,7 @@ A review is a short- to long-form text article about a spot.
     <Whatser::Review @user_id=null, @id=101, @body="whatser spot review.", @created_at="2010-12-24T16:45:55Z">
 
 
-### Details
+=== Details
 
 Details are miscellaneous, freeform information about a spot, such as operating hours, pricing, etc. The data attribute serializes a hash, which can be used to store arbitrary spot details.
 
@@ -171,7 +171,7 @@ Details are miscellaneous, freeform information about a spot, such as operating 
     <Whatser::Detail @data={"meta"=>"Long metadata here", "opening_hours" => "9-5"}, @user_id=null, @id=101>
 
 
-### Media
+=== Media
 	
 Media are photos, logos, and other graphics associated with a spot. You can create new media either by supplying a file for a multipart upload, or else with a link to an existing online image.
 
@@ -186,7 +186,7 @@ Media are photos, logos, and other graphics associated with a spot. You can crea
     <Whatser::Media @mid_pic="http://example.com/images/medium/4394.jpg", @name="photo.jpg", @small_pic="http://example.com/images/small/4394.jpg", @poi_id=101, @mime="image/jpeg", @thumb_pic="http://example.com/images/thumb/4394.jpg", @user_id=1, @id=33, @url="http://example.com/images/original/4394.jpg", @created_at="2010-12-20T08:25:56Z">
 
 
-### Tags
+=== Tags
 
 Tags are freeform text that reflect user thoughts, opinions, and feedback on specific spots.
 
@@ -200,7 +200,7 @@ Tags are freeform text that reflect user thoughts, opinions, and feedback on spe
     <Whatser::Tag @name="my tag">
 
 
-### Follows
+=== Follows
 
 Follows represent a user's interest in another user, namely the user's spot activity, collections, and content. Following another user integrates that user's Whatser social and POI graph into the follower's suggestions and other dynamic Whatser content.
 
@@ -215,7 +215,7 @@ Follows represent a user's interest in another user, namely the user's spot acti
     <Whatser::Follow @location="Amsterdam, NL", @premium=false, @avatar_pic="http://example.com/avatars/thumb/1.jpg", @promoted=false, @name="Example User", @id=1>
 
 
-### Check Ins
+=== Check Ins
 
 A check in represents a user's visit to a spot, and will typically have a counterpart in other location-based applications such as Foursquare, Gowalla, and Facebook Places.
 
@@ -227,7 +227,7 @@ A check in represents a user's visit to a spot, and will typically have a counte
     <Whatser::CheckIn @message="statuscastin' over here", @lng=4.8931739, @rating=3, @lat=52.3665312, @check_out_at="2010-12-24T16:46:38Z", @name="Popular Spot", @poi_id=101, @check_in_at="2010-12-24T16:31:38Z", @user_id=101>
 
 
-### Data Sources
+=== Data Sources
 
 A data source represents a free or purchasable content stream of collected spots, media, and reviews. Users can subscribe to data sources in order to access their content in Whatser. To begin the subscription and payment process, redirect your user to the data source's subscription_url.
 
@@ -239,7 +239,7 @@ A data source represents a free or purchasable content stream of collected spots
     <Whatser::DataSource @review_count=405, @poi_count=0, @price=0.0, @collection_count=0, @name="Rough Guides - Barcelona", @media_count=0, @id=9, @users=[{"name": "premium user", "id": 33}]>
 
 
-### Social Networks
+=== Social Networks
 
 The API integrates with several social networks (Facebook, Foursquare, Gowalla, and Twitter), allowing users from those networks to login from or connect their accounts with Whatser. All four networks are supported for connecting a user account (via the OAuth 2 web authorization flow), and disconnecting a user account. In addition, the API provides access to other select parts of these networks to support social media and location-based user activity.
 

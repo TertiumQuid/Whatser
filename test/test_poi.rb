@@ -32,7 +32,16 @@ class TestPoi < Test::Unit::TestCase
   
   def test_delete
     assert @client.spots.delete(1).is_a?(Whatser::Response)
-  end    
+  end  
+  
+  def test_save
+    assert @poi.save.is_a?(Whatser::Response)
+  end
+  
+  def test_save_and_update
+    @poi.id = 1
+    assert @poi.save.is_a?(Whatser::Response)
+  end
   
   def test_from_hash_to_model
     hash = {'id' => 1, 'name' => 'test', 'lat' => 1, 'lng' => 1, 'street' => 'test', 
