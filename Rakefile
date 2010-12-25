@@ -13,7 +13,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "whatser"
-  gem.homepage = "http://github.com/TertiumQuid/hondius"
+  gem.homepage = "http://github.com/sogeo/whatser"
   gem.license = "MIT"
   gem.summary = %Q{An HTTP and model DSL wrapper for the Whatser API}
   gem.description = %Q{TODO: longer description of your gem}

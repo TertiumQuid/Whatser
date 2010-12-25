@@ -16,9 +16,9 @@ The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with What
 
 ### 0. Register your application with the Whatser API
 
-In order to use the Whatser Gem, you'll need to register for a Whatser user account (https://production-2.sogeoapi.com/oauth/user/new), and create a client application for that user, which will then give you an application key and secret (https://production-2.sogeoapi.com/oauth/user/client_applications/new).
+In order to use the Whatser Gem, you'll need to register for a Whatser user account (https://production-2.sogeoapi.com/oauth/user/new), and create a client application for that user which will then give you an application key and secret (https://production-2.sogeoapi.com/oauth/user/client_applications/new).
 
-Once you have your key and secret, you can start using the gem by instantiating a Whatser client with those credentials.
+Once you have your key and secret, you can start using the gem by instantiating a Whatser client with those credentials:
 
 ### 1. Instantiate a Client (on demand or with default configuration)
 
@@ -104,6 +104,7 @@ The API stores user profiles, which may have originated either directly from API
 
     <Whatser::User @bio="Example", @location="Amsterdam, NL", @facebook_id="1234567890", @email="user@example.com", @gowalla_id="1234567890", @avatar_pic="http://example.com/img/14.jpg", @promoted=false, @name="User", @twitter_name="example", @last_login_at="2010-12-24T16:46:23Z", @twitter_id="1234567890", @id=101, @foursquare_id="1234567890">
 
+
 ### Spots (Points of Interest)
 
 A spot is a named geographical location and the most fundamental kind of content in the API. Typically with counterparts in Gowalla or Foursquare, spots have various associated content such as photos or tags. If you supply only the lat and lng, or only the address, the spot will be automatically geocoded/reverse geocoded appropriately.
@@ -119,6 +120,7 @@ A spot is a named geographical location and the most fundamental kind of content
 
     <Whatser::Poi @lng=4.0, @region="Noord Holland", @gowalla_id="123456", @lat=52.0, @tag_list=nil, @city="Amsterdam", @name="Example Spot", @country="Netherlands", @street="example street", @id=101, @postal_code="1012", @foursquare_id="123456", @created_at="2010-12-24T16:46:23Z">
 
+
 ### Collections
 
 A collection is a set of spots of particular interest to a user. By adding spots to their personal collection, users build a list of their favorite locations around a city.
@@ -126,12 +128,18 @@ A collection is a set of spots of particular interest to a user. By adding spots
     Whatser.client.collections.mine( :page => 1, :per_page => 10 )
     Whatser.client.collections.add( spot_id )
 
+    <Whatser::Collection @data=[#<Whatser::Poi>, #<Whatser::Poi>], @city_name="Amsterdam", @city=["Amsterdam"]>
+
+
 ### Cities
 
 A user's cities represent the cities in which they have collected spots.
 
     Whatser.client.cities.mine( :page => 1, :per_page => 10 )
     Whatser.client.cities.user( user_id, :page => 1, :per_page => 10 )
+
+    <Whatser::City @count=5, @name="Amsterdam">
+
 
 ### Reviews
 
@@ -145,9 +153,12 @@ A review is a short- to long-form text article about a spot.
     m.save
     m.delete
 
+    <Whatser::Review @user_id=null, @id=101, @body="whatser spot review.", @created_at="2010-12-24T16:45:55Z">
+
+
 ### Details
 
-Details are miscellaneous, freeform information about a spot, such as operating hours, pricing, etc.
+Details are miscellaneous, freeform information about a spot, such as operating hours, pricing, etc. The data attribute serializes a hash, which can be used to store arbitrary spot details.
 
     Whatser.client.details.list( spot_id, :page => 1, :per_page => 10 )
     Whatser.client.details.find( spot_id, details_id )
@@ -156,6 +167,9 @@ Details are miscellaneous, freeform information about a spot, such as operating 
     m = Whatser.client.details.new( :data => {:title => 'details', :opening_hours => '8:00-5:00'} )
     m.save
     m.delete
+
+    <Whatser::Detail @data={"meta"=>"Long metadata here", "opening_hours" => "9-5"}, @user_id=null, @id=101>
+
 
 ### Media
 	
@@ -169,6 +183,9 @@ Media are photos, logos, and other graphics associated with a spot. You can crea
     m.save
     m.delete
 
+    <Whatser::Media @mid_pic="http://example.com/images/medium/4394.jpg", @name="photo.jpg", @small_pic="http://example.com/images/small/4394.jpg", @poi_id=101, @mime="image/jpeg", @thumb_pic="http://example.com/images/thumb/4394.jpg", @user_id=1, @id=33, @url="http://example.com/images/original/4394.jpg", @created_at="2010-12-20T08:25:56Z">
+
+
 ### Tags
 
 Tags are freeform text that reflect user thoughts, opinions, and feedback on specific spots.
@@ -179,6 +196,9 @@ Tags are freeform text that reflect user thoughts, opinions, and feedback on spe
     m = Whatser.client.tags.new( :name => 'my tag' )
     m.save
     m.delete
+
+    <Whatser::Tag @name="my tag">
+
 
 ### Follows
 
@@ -192,6 +212,8 @@ Follows represent a user's interest in another user, namely the user's spot acti
     m.save
     m.delete
 
+    <Whatser::Follow @location="Amsterdam, NL", @premium=false, @avatar_pic="http://example.com/avatars/thumb/1.jpg", @promoted=false, @name="Example User", @id=1>
+
 
 ### Check Ins
 
@@ -202,6 +224,9 @@ A check in represents a user's visit to a spot, and will typically have a counte
     m = Whatser.check_ins.follows.new( params[:check_in] )
     m.save
 
+    <Whatser::CheckIn @message="statuscastin' over here", @lng=4.8931739, @rating=3, @lat=52.3665312, @check_out_at="2010-12-24T16:46:38Z", @name="Popular Spot", @poi_id=101, @check_in_at="2010-12-24T16:31:38Z", @user_id=101>
+
+
 ### Data Sources
 
 A data source represents a free or purchasable content stream of collected spots, media, and reviews. Users can subscribe to data sources in order to access their content in Whatser. To begin the subscription and payment process, redirect your user to the data source's subscription_url.
@@ -211,9 +236,14 @@ A data source represents a free or purchasable content stream of collected spots
     m = Whatser.client.data_sources.find( 1 )
     redirect_to m.subscription_url(:display => 'touch')
 
+    <Whatser::DataSource @review_count=405, @poi_count=0, @price=0.0, @collection_count=0, @name="Rough Guides - Barcelona", @media_count=0, @id=9, @users=[{"name": "premium user", "id": 33}]>
+
+
 ### Social Networks
 
-The API integrates with several social networks (Facebook, Foursquare, Gowalla, and Twitter), allowing users from those networks to login from or connect their accounts with Whatser. All four networks are supported for connecting a user account (via the OAuth web authorization flow), and disconnecting a user account. In addition, the API provides access to other select parts of these networks to support social media and location-based user activity.
+The API integrates with several social networks (Facebook, Foursquare, Gowalla, and Twitter), allowing users from those networks to login from or connect their accounts with Whatser. All four networks are supported for connecting a user account (via the OAuth 2 web authorization flow), and disconnecting a user account. In addition, the API provides access to other select parts of these networks to support social media and location-based user activity.
+
+To connect a user to or register a new user through their social network, redirect the user to the service's connection_url. Once the user has been connected their network, they are then redirected through the Whatser authentication path as normal, where you can then retrieve their oauth access token.
 
 	redirect_to Whatser.client.facebook.connection_url(:display => 'wap')
 	Whatser.client.facebook.disconnection_url
@@ -229,7 +259,7 @@ The Twitter and Facebook classes allow for content publishing, meaning status tw
     Whatser.client.facebook.wall_post(:name => 'my link', :link => 'http://example.com', :caption => 'click this link', :description => 'summary here', :picture => 'http://example.com/img/whatser.png', :user_id => '101,201,33')
     Whatser.client.twitter.status_update('tweeting!', :lat => 52.3665312, :long => 4.8931739, :display_coordinates => true, :place_id => twitter_places_id)
 
-When a user connects a social network account to the Whatser API, their friends are automatically imported at this time. To keep a user's friends updated, you can call a get_friends method on the Twitter and Facebook classes to import any new friends of that user who have recently registered with Whatser.
+When a user connects a social network account to the Whatser API, their friends are automatically imported at this time. To keep a user's friends updated, you can call a get_friends method on the Twitter and Facebook classes to import any new friends of that user who have recently registered with Whatser. Note, only newly imported friends are returned.
 
     Whatser.client.facebook.get_friends
     Whatser.client.twitter.get_friends
@@ -256,6 +286,6 @@ Twitter: @sogeoapi
 
 == Copyright
 
-Copyright (c) 2010 Travis Dunn / Whatser Company. See LICENSE.txt for
+Copyright (c) 2010 Travis Dunn / SoGeo Company. See LICENSE.txt for
 further details.
 
