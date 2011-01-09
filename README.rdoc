@@ -63,6 +63,7 @@ Note, you should store your user's oauth token so it can be used to instantiate 
 Once you have an oauth token for a user, you can access the Whatser API by instantiating a Whatser client and making calls using the Whatser resource classes. e.g.
 
     client = Whatser::Client.new( :oauth_token => '123abc' )
+    client.authorized?
     authenticated_user = client.user.me
     spots = client.spots.search(:geo => "52.3665312,4.8931739", :text => "pizza", :per_page => 30).data
     spots.each { |spot| spot.tag('my tag') }
@@ -109,6 +110,14 @@ The API stores user profiles, which may have originated either directly from API
     m.connection
 
     <Whatser::User @bio="Example", @location="Amsterdam, NL", @facebook_id="1234567890", @email="user@example.com", @gowalla_id="1234567890", @avatar_pic="http://example.com/img/14.jpg", @promoted=false, @name="User", @twitter_name="example", @last_login_at="2010-12-24T16:46:23Z", @twitter_id="1234567890", @id=101, @foursquare_id="1234567890">
+
+The API also permits anonymous user access, but in order to do so an anonymous user must first be created. Anonymous users have limited privileges and no email address, but otherwise function identically to authorized users. After the user is created, you can get the oauth token to use with your client and perform actions on behalf of the anonymous user.
+
+    client = Whatser::Client.new
+    anonymous = client.users.anonymous
+    client.oauth_token = anonymous.oauth_token
+    suggested_poi = client.spots.suggested
+    client.collections.add( suggested_poi.data.first.id )
 
 
 === Spots (Points of Interest)

@@ -45,5 +45,9 @@ module Whatser
     include Whatser::Configuration   
     include Whatser::Http
     include Whatser::OAuth
+    
+    def authorized?
+      !oauth_token.blank?
+    end
   end   
 end

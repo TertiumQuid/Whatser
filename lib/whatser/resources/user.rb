@@ -19,7 +19,7 @@ module Whatser
         api_request :get, "/api/users/lookup", {:query => opts}
       end        
       
-      def search(opts={})
+      def suggested(opts={})
         api_request :get, "/api/users/suggested", {:query => opts}
       end        
       
@@ -33,7 +33,7 @@ module Whatser
               
       def create(params={})
         api_request :post, "/api/users", {:body => {'user' => params} }, :auth => :key
-      end        
+      end
     end      
 
     def save
@@ -47,6 +47,16 @@ module Whatser
     def connection
       Whatser::Follow.connection(id)
     end 
+    
+    def oauth_token
+      if access_tokens.blank? 
+        nil
+      elsif access_tokens.is_a?(Array)
+        access_tokens.first
+      else
+        access_token
+      end
+    end
     
     def facebook_connected?
       !facebook_id.blank?
@@ -65,7 +75,7 @@ module Whatser
     end                             
           
     def to_params
-      {:name=>name,:avatar_pic=>@remote_avatar,:location=>location,:bio=>bio,:email=>email,:password=>password,:lat=>lat,:lng=>lng}
+      {:name=>name,:avatar_pic=>@remote_avatar,:location=>location,:bio=>bio,:email=>email}
     end      
   end
 end

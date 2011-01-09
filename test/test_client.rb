@@ -73,4 +73,12 @@ class TestClient < Test::Unit::TestCase
     assert_equal client, client.gowalla.client
     assert_equal client, client.twitter.client
   end
+  
+  def test_authorized
+    client = Whatser::Client.new
+    assert_equal false, client.authorized?
+    
+    client.oauth_token = 'test'
+    assert_equal true, client.authorized?
+  end
 end
