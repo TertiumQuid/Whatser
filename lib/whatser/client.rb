@@ -36,6 +36,7 @@ module Whatser
     def subscriptions; Whatser::Subscription.set(self); end
     def tags; Whatser::Tag.set(self); end
     def cities; Whatser::City.set(self); end
+    def feeds; Whatser::ActivityFeed.set(self); end    
     
     def facebook; Whatser::Facebook.set(self); end
     def foursquare; Whatser::Foursquare.set(self); end

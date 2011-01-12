@@ -50,6 +50,10 @@ module Whatser
       (data || []).each(&block)
     end      
     
+    def size
+      (data || []).size
+    end
+    
   private      
     
     def set_city

@@ -23,7 +23,7 @@ module Whatser
       end
       
       def ignore(user_id)
-        api_request :delete, "/api/follows/#{user_id}"
+        delete(user_id)
       end
       
       def connection(user_id)

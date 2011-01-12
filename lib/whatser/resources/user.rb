@@ -11,28 +11,28 @@ module Whatser
         api_request :get, "/api/users/me"
       end
       
-      def anonymous(opts={})
-        api_request :get, "/api/users/anonymous", {:query => opts}
+      def anonymous
+        api_request :get, "/api/users/anonymous"
       end
       
-      def search(opts={})
-        api_request :get, "/api/users/lookup", {:query => opts}
+      def search(params={})
+        api_request :get, "/api/users/lookup", {:query => params}
       end        
       
-      def suggested(opts={})
-        api_request :get, "/api/users/suggested", {:query => opts}
+      def suggested(params={})
+        api_request :get, "/api/users/suggested", {:query => params}
       end        
       
-      def find(id, opts={})
-        api_request :get, "/api/users/#{id}/profile", {:query => opts}
-      end
-      
-      def invite(emails, opts={})
-        api_request :post, "/api/invites", {:query => emails}
+      def find(id, params={})
+        api_request :get, "/api/users/#{id}/profile", {:query => params}
       end
               
       def create(params={})
         api_request :post, "/api/users", {:body => {'user' => params} }, :auth => :key
+      end
+
+      def invite(emails)
+        api_request :post, "/api/invites", {:query => emails}
       end
     end      
 

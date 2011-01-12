@@ -15,7 +15,7 @@ module Whatser
     end
     
     def login(email, password)
-      request( :get, 'oauth/access_token', {:query => password_grant_params(email, password)}, :auth => :key, :keys => auth_keys )
+      request( :get, '/oauth/access_token', {:query => password_grant_params(email, password)}, :auth => :key, :keys => auth_keys )
     end
     
   private

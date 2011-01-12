@@ -4,8 +4,8 @@ module Whatser
     attr_accessor :data_source_name,:created_at
     
     class << self
-      def list(opts={})
-        api_request :get, "/api/subscriptions", {:query => opts}
+      def list(params={})
+        api_request :get, "/api/subscriptions", {:query => params}
       end
     end      
   end

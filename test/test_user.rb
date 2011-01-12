@@ -3,6 +3,7 @@ require 'helper'
 class TestUser < Test::Unit::TestCase
   def setup
     @client = Whatser::Client.new
+    @user = Whatser::User.new
   end
 
   def test_to_params
@@ -40,4 +41,13 @@ class TestUser < Test::Unit::TestCase
   def test_create
     assert @client.users.create(:name => 'test', :email => 'test@example.com', :password => '123pass').is_a?(Whatser::Response)
   end
+  
+  def test_save
+    assert @user.save.is_a?(Whatser::Response)
+  end  
+  
+  def test_save_and_update
+    @user.id = 1
+    assert @user.save.is_a?(Whatser::Response)
+  end  
 end

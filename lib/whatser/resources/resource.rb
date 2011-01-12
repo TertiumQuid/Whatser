@@ -46,8 +46,8 @@ module Whatser
       params.each_pair { |k,v| send("#{k}=", v) if respond_to?(k) }
     end
     
-    def api_request(verb, path, opts={})
-      self.class.api_request(verb, path, opts)
+    def api_request(verb, path, params={}, opts={})
+      self.class.api_request(verb, path, params, opts)
     end
   end
 end

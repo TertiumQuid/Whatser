@@ -4,12 +4,12 @@ module Whatser
     alias :collections_count :count
     
     class << self
-      def mine(opts={})
-        api_request :get, "/api/users/me/black/book/cities", {:query => opts}
+      def mine(params={})
+        api_request :get, "/api/users/me/black/book/cities", {:query => params}
       end
       
-      def user(user_id, opts={})
-        api_request :get, "/api/users/#{user_id}/black/book/cities", {:query => opts}
+      def user(user_id, params={})
+        api_request :get, "/api/users/#{user_id}/black/book/cities", {:query => params}
       end        
     end      
   end

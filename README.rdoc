@@ -145,6 +145,10 @@ A collection is a set of spots of particular interest to a user. By adding spots
 
     <Whatser::Collection @data=[#<Whatser::Poi>, #<Whatser::Poi>], @city_name="Amsterdam", @city=["Amsterdam"]>
 
+As a convenience you can also iterate over a collection's spot data:
+
+    collection = Whatser::Collection.new( [spot1, spot2, spot3] )
+    collection.each { |c| puts c.name }
 
 === Cities
 
@@ -293,11 +297,11 @@ You can use convenience methods on users and spots to determine their connection
 
 == Contact
 
-+ Developer Email: travis@sogeocompany.com
-+ API Documentation: http://docs.sogeoapi.com
-+ Facebook: http://www.facebook.com/sogeo
-+ Whatser: http://www.whatser.com
-+ Twitter: @sogeoapi
+* Developer Email: travis@sogeocompany.com
+* API Documentation: http://docs.sogeoapi.com
+* Facebook: http://www.facebook.com/sogeo
+* Whatser: http://www.whatser.com
+* Twitter: @sogeoapi
 
 == Copyright
 

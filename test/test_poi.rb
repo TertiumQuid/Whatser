@@ -20,7 +20,7 @@ class TestPoi < Test::Unit::TestCase
   
   def test_search
     assert @client.spots.search(:opt => 'test').is_a?(Whatser::Response)
-  end  
+  end
   
   def test_find
     assert @client.spots.find(1, :opt => 'test').is_a?(Whatser::Response)
