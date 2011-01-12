@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whatser}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Travis Dunn"]
-  s.date = %q{2010-12-25}
+  s.date = %q{2011-01-12}
   s.description = %q{The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with Whatser's location-based web services (see http://docs.sogeoapi.com for more details).}
   s.email = %q{cmd@travisdunn.com}
   s.extra_rdoc_files = [
@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
     "lib/whatser/errors.rb",
     "lib/whatser/net/http.rb",
     "lib/whatser/net/oauth.rb",
+    "lib/whatser/resources/activity_feed.rb",
     "lib/whatser/resources/check_in.rb",
     "lib/whatser/resources/city.rb",
     "lib/whatser/resources/collection.rb",
@@ -51,11 +52,16 @@ Gem::Specification.new do |s|
     "lib/whatser/resources/tag.rb",
     "lib/whatser/resources/user.rb",
     "test/helper.rb",
+    "test/test_activity_feed.rb",
+    "test/test_check_in.rb",
+    "test/test_city.rb",
     "test/test_client.rb",
     "test/test_collection.rb",
     "test/test_configuration.rb",
     "test/test_data_source.rb",
+    "test/test_detail.rb",
     "test/test_facebook.rb",
+    "test/test_follow.rb",
     "test/test_foursquare.rb",
     "test/test_gowalla.rb",
     "test/test_hondius.rb",
@@ -64,7 +70,11 @@ Gem::Specification.new do |s|
     "test/test_poi.rb",
     "test/test_resource.rb",
     "test/test_response.rb",
+    "test/test_review.rb",
+    "test/test_subscription.rb",
+    "test/test_tag.rb",
     "test/test_twitter.rb",
+    "test/test_user.rb",
     "whatser.gemspec"
   ]
   s.homepage = %q{http://github.com/sogeo/whatser}
@@ -74,11 +84,16 @@ Gem::Specification.new do |s|
   s.summary = %q{An HTTP and model DSL wrapper for the Whatser API}
   s.test_files = [
     "test/helper.rb",
+    "test/test_activity_feed.rb",
+    "test/test_check_in.rb",
+    "test/test_city.rb",
     "test/test_client.rb",
     "test/test_collection.rb",
     "test/test_configuration.rb",
     "test/test_data_source.rb",
+    "test/test_detail.rb",
     "test/test_facebook.rb",
+    "test/test_follow.rb",
     "test/test_foursquare.rb",
     "test/test_gowalla.rb",
     "test/test_hondius.rb",
@@ -87,7 +102,11 @@ Gem::Specification.new do |s|
     "test/test_poi.rb",
     "test/test_resource.rb",
     "test/test_response.rb",
-    "test/test_twitter.rb"
+    "test/test_review.rb",
+    "test/test_subscription.rb",
+    "test/test_tag.rb",
+    "test/test_twitter.rb",
+    "test/test_user.rb"
   ]
 
   if s.respond_to? :specification_version then
