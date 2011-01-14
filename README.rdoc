@@ -150,6 +150,10 @@ As a convenience you can also iterate over a collection's spot data:
     collection = Whatser::Collection.new( [spot1, spot2, spot3] )
     collection.each { |c| puts c.name }
 
+If a user somehow discovers a spot due to another user's recommendation or similar, you can explicitly thank them for the recommendation, slightly increasing the user's Whatser reputation and influence as an opinion leader.
+
+    user.thanks( spot_id, :message => 'thanks, this spot looks great', :facebook => true, :twitter => true)
+
 === Cities
 
 A user's cities represent the cities in which they have collected spots.

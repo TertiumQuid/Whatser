@@ -45,7 +45,7 @@ module Whatser
     end
           
     def connection
-      Whatser::Follow.connection(id)
+      Whatser::Follow.set(self.class.client).connection(id)
     end 
     
     def thanks(poi_id,params={})
