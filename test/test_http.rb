@@ -23,6 +23,12 @@ class TestHttp < Test::Unit::TestCase
     assert_equal expected, @client.send(:request_options, {:body => {:extra => 1} })
   end  
   
+  def test_request_options_with_client_auth
+    @client.api_key = '123'
+    expected = {:query => {:client_id => '123'}, :body => nil}
+    assert_equal expected, @client.send(:request_options, {}, {:auth => :key})
+  end
+  
   def test_base_uri_on_included
     assert_equal @client.api_uri, Whatser::Http.base_uri
   end

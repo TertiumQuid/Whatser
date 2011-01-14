@@ -66,6 +66,11 @@ class TestResource < Test::Unit::TestCase
     assert mod.is_a?(Whatser::Poi)
   end  
   
+  def test_from_hash_to_model_with_string
+    mod = Whatser::Resource.from_hash_to_model('freetextstringtest')
+    assert mod.is_a?(Whatser::Resource)
+  end
+  
   def test_from_hash_to_model_empty
     mod = Whatser::Resource.from_hash_to_model(nil)
     assert mod.is_a?(Whatser::Resource)

@@ -32,7 +32,7 @@ module Whatser
       end
 
       def invite(emails)
-        api_request :post, "/api/invites", {:query => emails}
+        api_request :post, "/api/invites", {:query => {'emails' => emails} }
       end
     end      
 
@@ -47,6 +47,10 @@ module Whatser
     def connection
       Whatser::Follow.connection(id)
     end 
+    
+    def thanks(poi_id,params={})
+      api_request :post, "/api/users/#{id}/poi/#{poi_id}/thanks", {:query => params}
+    end
     
     def oauth_token
       if access_tokens.blank? 

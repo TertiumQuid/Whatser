@@ -13,6 +13,7 @@ module Whatser
       end
     end
     
+    attr_accessor :logger
     attr_accessor  *Whatser::Configuration::VALID_OPTIONS_KEYS
     def initialize(options={})
       Whatser::Configuration::VALID_OPTIONS_KEYS.each do |key|

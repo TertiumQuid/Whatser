@@ -17,10 +17,14 @@ module Whatser
       "#{api_uri}#{path}"
     end
 
-    def request_options(params={})
+    def request_options(params={}, options={})
       params ||= {}
-      return { :query => {:oauth_token => oauth_token}.merge(params[:query] || {}), 
-               :body => params[:body] }
+      return { :query => query_options(params[:query], options), :body => params[:body] }
+    end
+    
+    def query_options(params, options={})
+      base = options[:auth] == :key ? {:client_id => api_key} : {:oauth_token => oauth_token}
+      base.merge( params || {} )
     end
   end
 end

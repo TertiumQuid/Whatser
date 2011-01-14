@@ -42,6 +42,14 @@ class TestUser < Test::Unit::TestCase
     assert @client.users.create(:name => 'test', :email => 'test@example.com', :password => '123pass').is_a?(Whatser::Response)
   end
   
+  def test_connection
+    assert @user.connection.is_a?(Whatser::Response)
+  end  
+
+  def test_thanks
+    assert @user.thanks(1, :opt => 'test').is_a?(Whatser::Response)
+  end  
+  
   def test_save
     assert @user.save.is_a?(Whatser::Response)
   end  
