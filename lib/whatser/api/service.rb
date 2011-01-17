@@ -1,8 +1,16 @@
 module Whatser
   class Service < Whatser::Resource
-    def key
-      self.class.name.split('::').last.downcase
+    class << self
+      def connection_url
+        "#{client.api_uri}/oauth/services/#{key}/authorize"
+      end      
+      
+      def key
+        self.name.split('::').last.downcase
+      end
     end
+    
+    def key; self.class.key; end
     
     def connection_url
       "#{client.api_uri}/oauth/services/#{key}/authorize"

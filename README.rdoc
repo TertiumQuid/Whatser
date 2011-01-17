@@ -28,13 +28,14 @@ Declare Whatser in your Gemfile:
 
 And instantiate a Whatser client as need:
 
-    client = Whatser::Client.new(:api_key => 'key', :api_secret => 'secret', :oauth_token => '123abc')
+    client = Whatser::Client.new(:api_key => 'key', :api_secret => 'secret', :oauth_token => '123abc', :logger => Rails.logger)
 
 or...
 
     Whatser::Client.configure do |config|
       config.api_key = 'key'
       config.api_secret = 'secret'
+      config.logger = Rails.logger
     end
     client1 = Whatser::Client.new( :oauth_token => '123abc' )
     client2 = Whatser::Client.new( :oauth_token => '789xyz' )
@@ -260,6 +261,17 @@ A data source represents a free or purchasable content stream of collected spots
     redirect_to m.subscription_url(:display => 'touch')
 
     <Whatser::DataSource @review_count=405, @poi_count=0, @price=0.0, @collection_count=0, @name="Rough Guides - Barcelona", @media_count=0, @id=9, @users=[{"name": "premium user", "id": 33}]>
+
+
+=== Activity Feeds
+
+User activity is recorded by the API, for example when a user adds or tags a POI, befriends another user, or uploads a photo. This activity is recorded in a user's activity feed, a collection of short messages detailing that user's activity. You can view feeds either by user, or globally.
+
+    Whatser.client.feed.user( user_id, :page => 1, :per_page => 10 )
+    Whatser.client.feed.mine( :page => 1, :per_page => 10 )
+    Whatser.client.feed.global( :page => 1, :per_page => 10 )
+
+    <Whatser::ActivityFeed @message="you uploaded a photo.", @poi_id=101, @object_avatar=nil, @user_avatar="http://example.com/avatars/imgs/1.jpg", @user_id=33, @object_name="Something", @user_name="This User", @object_id=1001, @poi_name="Some Spot", @city="Amsterdam">
 
 
 === Social Networks

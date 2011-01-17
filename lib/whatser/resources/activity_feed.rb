@@ -1,7 +1,7 @@
 module Whatser
   class ActivityFeed < Whatser::Resource
     attr_accessor :user_id,:user_name,:user_avatar,:poi_id,:poi_name,:object_id,:object_name,:object_avatar
-    attr_accessor :city,:message,:created_At
+    attr_accessor :city,:message,:created_at
     
     class << self
       def mine(params={})
