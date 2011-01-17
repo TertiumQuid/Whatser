@@ -51,5 +51,10 @@ module Whatser
     def authorized?
       !oauth_token.blank?
     end
+    
+    def log(msg,level=:info)
+      return if logger.blank?
+      logger.send(level, msg)
+    end
   end   
 end

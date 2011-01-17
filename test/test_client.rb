@@ -1,10 +1,20 @@
 require 'helper'
+require 'logger'
 
 class TestClient < Test::Unit::TestCase
+  def setup
+    @client = Whatser::Client.new
+  end
+
+  def reset_config_defaults
+    Whatser::Client.configure do |config|
+      config.logger = nil
+    end
+  end  
+  
   def test_attr_accessor
-    client = Whatser::Client.new
     Whatser::Configuration::VALID_OPTIONS_KEYS.each do |a|
-      assert client.respond_to?(a)
+      assert @client.respond_to?(a)
     end
   end
   
@@ -39,6 +49,18 @@ class TestClient < Test::Unit::TestCase
     assert_equal 'key', client.api_key
     assert_equal 'secret', client.api_secret
     assert_equal '123abc', client.oauth_token
+    reset_config_defaults
+  end
+  
+  def test_initialize_with_logger
+    logger = Logger.new('test-logger.txt')
+    Whatser::Client.configure do |config|
+      config.logger = logger
+    end
+    client = Whatser::Client.new  
+    assert_equal logger, client.logger
+    reset_config_defaults
+    File.delete('test-logger.txt') if File::exists?( 'test-logger.txt' )
   end
   
   def test_resources
@@ -75,10 +97,28 @@ class TestClient < Test::Unit::TestCase
   end
   
   def test_authorized
-    client = Whatser::Client.new
-    assert_equal false, client.authorized?
+    assert_equal false, @client.authorized?
     
-    client.oauth_token = 'test'
-    assert_equal true, client.authorized?
+    @client.oauth_token = 'test'
+    assert_equal true, @client.authorized?
+  end
+  
+  def test_log
+    @client.logger = Logger.new('test-logger.txt')
+    
+    assert_equal true, @client.log('test123')
+    assert_equal true, @client.log('test456', :error)
+    
+    log = File.open('test-logger.txt') {|f| f.read}
+    assert log.include?('INFO -- : test123')
+    assert log.include?('ERROR -- : test456')
+    
+    File.delete('test-logger.txt') if File::exists?( 'test-logger.txt' )
+    @client.logger = nil
+  end  
+  
+  def test_log_without_logger
+    @client.logger = nil
+    assert_nil @client.log('test')
   end
 end

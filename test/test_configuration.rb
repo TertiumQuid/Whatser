@@ -6,11 +6,12 @@ class TestConfiguration < Test::Unit::TestCase
       config.api_key = nil
       config.api_secret = nil
       config.oauth_token = nil
-    end    
+      config.logger = nil
+    end
   end
   
   def test_valid_options_keys
-    expected = [:api_key,:api_secret,:username,:password,:oauth_token,:api_uri,:redirect_uri]
+    expected = [:api_key,:api_secret,:username,:password,:oauth_token,:api_uri,:redirect_uri,:logger]
     assert_equal expected, Whatser::Configuration::VALID_OPTIONS_KEYS
   end
   
@@ -21,6 +22,7 @@ class TestConfiguration < Test::Unit::TestCase
     assert_equal nil, client.api_secret
     assert_equal nil, client.oauth_token
     assert_equal nil, client.redirect_uri
+    assert_equal nil, client.logger
     assert_equal Whatser::Configuration::DEFAULT_API_URI, client.api_uri
   end
 end

@@ -1,6 +1,6 @@
 module Whatser
   module Configuration
-    VALID_OPTIONS_KEYS = [:api_key,:api_secret,:username,:password,:oauth_token,:api_uri,:redirect_uri]
+    VALID_OPTIONS_KEYS = [:api_key,:api_secret,:username,:password,:oauth_token,:api_uri,:redirect_uri,:logger]
     
     DEFAULT_API_URI = 'https://production-2.sogeoapi.com'.freeze
 
@@ -9,6 +9,7 @@ module Whatser
       base.api_secret    = nil
       base.oauth_token   = nil
       base.redirect_uri  = nil
+      base.logger        = nil
       base.api_uri       = DEFAULT_API_URI
     end
   end

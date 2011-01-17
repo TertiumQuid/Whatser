@@ -7,7 +7,10 @@ module Whatser
     end
     
     def request(verb, path, params={}, options={})
+      log("Whatser API Request: #{verb} @ #{path} with : #{params.to_s}")
       response = HTTParty.send( verb, compose_url(path), request_options( params ) )
+      log("Whatser API Response: #{response.code} with : #{response.body.to_s}")
+      
       Whatser::Response.new( response.body, {:code => response.code}.merge(options) ) 
     end
     
