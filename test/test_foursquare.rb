@@ -10,7 +10,11 @@ class TestFoursquare < Test::Unit::TestCase
   end
 
   def test_connection_url
-    expected = "#{@client.api_uri}/oauth/services/foursquare/authorize"
+    expected = "#{@client.api_uri}/oauth/services/foursquare/authorize?redirect_uri=&client_id="
     assert_equal expected, @client.foursquare.connection_url
   end
+  
+  def test_get_friends
+    assert @client.foursquare.get_friends(:opt => 'test').is_a?(Whatser::Response)
+  end  
 end

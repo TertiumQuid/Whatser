@@ -10,7 +10,11 @@ class TestTwitter < Test::Unit::TestCase
   end
 
   def test_connection_url
-    expected = "#{@client.api_uri}/oauth/services/twitter/authorize"
+    expected = "#{@client.api_uri}/oauth/services/twitter/authorize?redirect_uri=&client_id="
     assert_equal expected, @client.twitter.connection_url
+  end  
+  
+  def test_get_friends
+    assert @client.twitter.get_friends(:opt => 'test').is_a?(Whatser::Response)
   end  
 end

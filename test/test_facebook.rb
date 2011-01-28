@@ -10,7 +10,11 @@ class TestFacebook < Test::Unit::TestCase
   end
   
   def test_connection_url
-    expected = "#{@client.api_uri}/oauth/services/facebook/authorize"
+    expected = "#{@client.api_uri}/oauth/services/facebook/authorize?redirect_uri=&client_id="
     assert_equal expected, @client.facebook.connection_url
   end
+  
+  def test_get_friends
+    assert @client.facebook.get_friends(:opt => 'test').is_a?(Whatser::Response)
+  end  
 end

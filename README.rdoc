@@ -299,10 +299,11 @@ The Twitter and Facebook classes allow for content publishing, meaning status tw
     Whatser.client.facebook.wall_post(:name => 'my link', :link => 'http://example.com', :caption => 'click this link', :description => 'summary here', :picture => 'http://example.com/img/whatser.png', :user_id => '101,201,33')
     Whatser.client.twitter.status_update('tweeting!', :lat => 52.3665312, :long => 4.8931739, :display_coordinates => true, :place_id => twitter_places_id)
 
-When a user connects a social network account to the Whatser API, their friends are automatically imported at this time. To keep a user's friends updated, you can call a get_friends method on the Twitter and Facebook classes to import any new friends of that user who have recently registered with Whatser. Note, only newly imported friends are returned.
+When a user connects a social network account to the Whatser API, their friends are automatically imported at this time. To keep a user's friends updated, you can call a get_friends method on the Twitter, Foursquare, and Facebook classes to import any new friends of that user who have recently registered with Whatser. Note, only newly imported friends are returned.
 
     Whatser.client.facebook.get_friends
     Whatser.client.twitter.get_friends
+    Whatser.client.foursquare.get_friends
 
 You can use convenience methods on users and spots to determine their connections to external networks.
 
