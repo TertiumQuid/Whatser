@@ -3,7 +3,7 @@ require 'helper'
 class TestPoi < Test::Unit::TestCase
   def setup
     @client = Whatser::Client.new
-    @poi = Whatser::Poi.new
+    @poi = Whatser::Poi.set(@client).new
   end
   
   def test_to_params
@@ -61,15 +61,27 @@ class TestPoi < Test::Unit::TestCase
     assert_equal hash['country'], poi.country
   end
   
-  def foursquare_connected
+  def test_foursquare_connected
     assert_equal false, @poi.foursquare_connected?
     @poi.foursquare_id = 1
     assert_equal true, @poi.foursquare_connected?
   end
   
-  def gowalla_connected
+  def test_gowalla_connected
     assert_equal false, @poi.foursquare_connected?
     @poi.foursquare_id = 1
     assert_equal true, @poi.foursquare_connected?
   end  
+  
+  def test_activity
+    assert @poi.activity(:opt => 'test').is_a?(Whatser::Response)
+  end
+  
+  def test_details
+    assert @poi.details(:page => 1).is_a?(Whatser::Response)
+  end
+  
+  def test_reviews
+    assert @poi.reviews(:page => 1).is_a?(Whatser::Response)
+  end    
 end

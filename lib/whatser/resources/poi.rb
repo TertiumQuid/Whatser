@@ -51,12 +51,16 @@ module Whatser
     end
     
     def reviews(opts={})
-      Whatser::Review.list(id, opts)
+      Whatser::Review.set(self.class.client).list(id, opts)
     end
     
     def details(opts={})
-      Whatser::Detail.list(id, opts)
-    end            
+      Whatser::Detail.set(self.class.client).list(id, opts)
+    end    
+    
+    def activity(opts)
+      Whatser::ActivityFeed.set(self.class.client).spot( self.id, opts )
+    end
     
     def foursquare_connected?
       !foursquare_id.blank?

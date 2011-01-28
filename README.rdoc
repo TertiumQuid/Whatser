@@ -133,6 +133,10 @@ A spot is a named geographical location and the most fundamental kind of content
     m = Whatser.client.spots.new( :name => 'my spot', :lat => 52.0, :lng => 4.0 )
     m.save
     m.delete
+    results = m.details
+    results = m.reviews
+    results = m.tags
+    results = m.activity
 
     <Whatser::Poi @lng=4.0, @region="Noord Holland", @gowalla_id="123456", @lat=52.0, @tag_list=nil, @city="Amsterdam", @name="Example Spot", @country="Netherlands", @street="example street", @id=101, @postal_code="1012", @foursquare_id="123456", @created_at="2010-12-24T16:46:23Z">
 
@@ -265,9 +269,10 @@ A data source represents a free or purchasable content stream of collected spots
 
 === Activity Feeds
 
-User activity is recorded by the API, for example when a user adds or tags a POI, befriends another user, or uploads a photo. This activity is recorded in a user's activity feed, a collection of short messages detailing that user's activity. You can view feeds either by user, or globally.
+User activity is recorded by the API, for example when a user adds or tags a POI, befriends another user, or uploads a photo. This activity is recorded in a user's activity feed, a collection of short messages detailing that user's activity. You can view feeds either by user, by spot, or globally.
 
     Whatser.client.feed.user( user_id, :page => 1, :per_page => 10 )
+    Whatser.client.feed.spot( spot_id, :page => 1, :per_page => 10 )
     Whatser.client.feed.mine( :page => 1, :per_page => 10 )
     Whatser.client.feed.global( :page => 1, :per_page => 10 )
 
@@ -317,7 +322,7 @@ You can use convenience methods on users and spots to determine their connection
 * API Documentation: http://docs.sogeoapi.com
 * Facebook: http://www.facebook.com/sogeo
 * Whatser: http://www.whatser.com
-* Twitter: @sogeoapi
+* Twitter: @whatserapi
 
 == Copyright
 

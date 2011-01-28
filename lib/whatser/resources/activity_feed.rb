@@ -14,7 +14,11 @@ module Whatser
       
       def user(user_id, params={})
         api_request :get, "/api/users/#{user_id}/activity_feed", {:query => params}
-      end        
+      end   
+      
+      def spot(poi_id, params={})
+        api_request :get, "/api/poi/#{poi_id}/activity_feed", {:query => params}
+      end           
     end    
   end
 end
