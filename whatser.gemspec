@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whatser}
-  s.version = "0.3.2"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Travis Dunn"]
-  s.date = %q{2011-01-28}
+  s.date = %q{2011-02-03}
   s.description = %q{The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with Whatser's location-based web services (see http://docs.sogeoapi.com for more details).}
   s.email = %q{cmd@travisdunn.com}
   s.extra_rdoc_files = [
@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
     "lib/whatser/resources/check_in.rb",
     "lib/whatser/resources/city.rb",
     "lib/whatser/resources/collection.rb",
+    "lib/whatser/resources/comment.rb",
     "lib/whatser/resources/data_source.rb",
     "lib/whatser/resources/detail.rb",
     "lib/whatser/resources/follow.rb",
@@ -57,6 +58,7 @@ Gem::Specification.new do |s|
     "test/test_city.rb",
     "test/test_client.rb",
     "test/test_collection.rb",
+    "test/test_comment.rb",
     "test/test_configuration.rb",
     "test/test_data_source.rb",
     "test/test_detail.rb",
@@ -90,6 +92,7 @@ Gem::Specification.new do |s|
     "test/test_city.rb",
     "test/test_client.rb",
     "test/test_collection.rb",
+    "test/test_comment.rb",
     "test/test_configuration.rb",
     "test/test_data_source.rb",
     "test/test_detail.rb",
