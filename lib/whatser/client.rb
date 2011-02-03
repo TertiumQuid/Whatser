@@ -36,6 +36,7 @@ module Whatser
     def reviews; Whatser::Review.set(self); end
     def subscriptions; Whatser::Subscription.set(self); end
     def tags; Whatser::Tag.set(self); end
+    def comments; Whatser::Comment.set(self); end
     def cities; Whatser::City.set(self); end
     def feeds; Whatser::ActivityFeed.set(self); end    
     

@@ -77,6 +77,10 @@ class TestPoi < Test::Unit::TestCase
     assert @poi.activity(:opt => 'test').is_a?(Whatser::Response)
   end
   
+  def test_comments
+    assert @poi.comments(:opt => 'test').is_a?(Whatser::Response)
+  end  
+  
   def test_details
     assert @poi.details(:page => 1).is_a?(Whatser::Response)
   end

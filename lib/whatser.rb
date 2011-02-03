@@ -21,6 +21,7 @@ require File.expand_path('../whatser/resources/subscription', __FILE__)
 require File.expand_path('../whatser/resources/tag', __FILE__)
 require File.expand_path('../whatser/resources/user', __FILE__)
 require File.expand_path('../whatser/resources/follow', __FILE__)
+require File.expand_path('../whatser/resources/comment', __FILE__)
 require File.expand_path('../whatser/resources/activity_feed', __FILE__)
 
 require File.expand_path('../whatser/api/service', __FILE__)

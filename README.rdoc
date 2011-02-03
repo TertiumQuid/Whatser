@@ -9,6 +9,7 @@ The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with What
 * network connectivity (using httparty)
 * simple DSL for API resource classes (spots, media, reviews, check ins, etc.)
 * user spot collection management
+* check-in aggregation
 * social network integration (facebook, twitter, foursquare, gowalla)
 * photo uploads
 
@@ -265,6 +266,20 @@ A data source represents a free or purchasable content stream of collected spots
     redirect_to m.subscription_url(:display => 'touch')
 
     <Whatser::DataSource @review_count=405, @poi_count=0, @price=0.0, @collection_count=0, @name="Rough Guides - Barcelona", @media_count=0, @id=9, @users=[{"name": "premium user", "id": 33}]>
+
+
+=== Comments
+
+A comment is just a short user note that can be associated with other resources. At the moment, you can comment on a POI, Media, or an Activity Feed. Users can also delete their own comments.
+
+    Whatser.client.comments.poi( poi_id, :page => 1, :per_page => 10 )
+    Whatser.client.comments.media( media_id, :page => 1, :per_page => 10 )
+    Whatser.client.comments.create( 'activity_feed', feed_id, 'This is a comment. Interesting activity!' )
+    Whatser.client.comments.create( 'media', media_id, 'This is a comment on a media. Stunning photo!' )
+    m = Whatser.client.comments.create( 'poi', spot_id, 'This is a comment on a spot. Nice spot!' )
+    m.delete
+
+    <Whatser::Comment @body="This is a comment.", @id=101, @user_id=101, @activity_feed_id=null, @user_avatar="http://example.com/images/thumb/4394.jpg", @subject_id=33, @user_name='Whaster User', @created_at="2010-12-24T16:31:38Z", @subject_type='poi', @subject_name="Some Spot">
 
 
 === Activity Feeds

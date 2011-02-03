@@ -62,6 +62,10 @@ module Whatser
       Whatser::ActivityFeed.set(self.class.client).spot( self.id, opts )
     end
     
+    def comments(opts={})
+      Whatser::Comment.set(self.class.client).poi(id, opts)
+    end
+        
     def foursquare_connected?
       !foursquare_id.blank?
     end
