@@ -2,7 +2,7 @@ module Whatser
   class Follow < Whatser::Resource
     attr_accessor :id
     attr_accessor :name,:avatar_pic,:location
-    attr_accessor :promoted,:premium,:collections_count
+    attr_accessor :promoted,:collections_count
     attr_accessor :following,:followed,:foaf_count,:foaf
     
     class << self

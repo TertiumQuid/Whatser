@@ -79,13 +79,25 @@ class TestPoi < Test::Unit::TestCase
   
   def test_comments
     assert @poi.comments(:opt => 'test').is_a?(Whatser::Response)
-  end  
+  end   
   
-  def test_details
-    assert @poi.details(:page => 1).is_a?(Whatser::Response)
+  def branded_tags
+    @poi.branded_tags = nil
+    assert_nil @poi.branded_tags
+    
+    @poi.branded_tags = {}
+    assert_nil @poi.branded_tags
+    
+    @poi.branded_tags = []
+    assert_equal [], @poi.branded_tags
+    
+    tag = Whatser::Tag.new(:name => 'test')
+    tags = [tag]
+    @poi.branded_tags = tags
+    assert_equal [tag], @poi.branded_tags
+    
+    tags = [{"name"=>"hash","web_detail_pic_url"=>nil,"touch_detail_pic_url"=>nil,"touch_list_pic_url"=>nil,"web_list_pic_url"=>nil,"wap_detail_pic_url"=>nil,"wap_list_pic_url"=>nil}]
+    @poi.branded_tags = tags
+    assert_equal "hash", @poi.branded_tags.first.name
   end
-  
-  def test_reviews
-    assert @poi.reviews(:page => 1).is_a?(Whatser::Response)
-  end    
 end

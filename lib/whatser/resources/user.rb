@@ -2,9 +2,10 @@ module Whatser
   class User < Whatser::Resource
     attr_accessor :id,:facebook_id,:gowalla_id,:foursquare_id,:twitter_id
     attr_accessor :name,:twitter_name,:avatar_pic,:location,:bio,:email
-    attr_accessor :last_login_at,:promoted,:premium,:collections_count
+    attr_accessor :last_login_at,:promoted
     attr_writer   :avatar,:remote_avatar,:password,:lat,:lng
-    attr_writer   :access_tokens
+    attr_writer   :comments_count,:poi_count,:check_ins_count,:media_count,:taggings_count,:follows_count,:followers_count,:collections_count
+    attr_writer   :access_token
     
     class << self
       def me
@@ -53,13 +54,7 @@ module Whatser
     end
     
     def oauth_token
-      if access_tokens.blank? 
-        nil
-      elsif access_tokens.is_a?(Array)
-        access_tokens.first
-      else
-        access_token
-      end
+      access_token
     end
     
     def facebook_connected?

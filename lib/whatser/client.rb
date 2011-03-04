@@ -28,12 +28,10 @@ module Whatser
     def check_ins; Whatser::CheckIn.set(self); end
     def collections; Whatser::Collection.set(self); end
     def data_sources; Whatser::DataSource.set(self); end
-    def details; Whatser::Detail.set(self); end
     def media; Whatser::Media.set(self); end
     def spots; Whatser::Poi.set(self); end
     def users; Whatser::User.set(self); end
     def follows; Whatser::Follow.set(self); end
-    def reviews; Whatser::Review.set(self); end
     def subscriptions; Whatser::Subscription.set(self); end
     def tags; Whatser::Tag.set(self); end
     def comments; Whatser::Comment.set(self); end

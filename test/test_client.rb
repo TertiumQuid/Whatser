@@ -67,8 +67,7 @@ class TestClient < Test::Unit::TestCase
     client = Whatser::Client.new
     assert_equal Whatser::CheckIn, client.check_ins
     assert_equal Whatser::Collection, client.collections
-    assert_equal Whatser::DataSource, client.data_sources
-    assert_equal Whatser::Detail, client.details
+    assert_equal Whatser::Comment, client.comments
     assert_equal Whatser::Media, client.media
     assert_equal Whatser::Poi, client.spots
     assert_equal Whatser::Subscription, client.subscriptions
@@ -82,8 +81,7 @@ class TestClient < Test::Unit::TestCase
     
     assert_equal client, client.check_ins.client
     assert_equal client, client.collections.client
-    assert_equal client, client.data_sources.client
-    assert_equal client, client.details.client
+    assert_equal client, client.comments.client
     assert_equal client, client.media.client
     assert_equal client, client.spots.client
     assert_equal client, client.subscriptions.client

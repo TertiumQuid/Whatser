@@ -1,8 +1,9 @@
 module Whatser
   class Poi < Whatser::Resource
     attr_accessor :id,:user_id,:gowalla_id,:foursquare_id
-    attr_accessor :name,:lat,:lng,:street,:district,:region,:city,:postal_code,:country
-    attr_accessor :tag_list,:created_at
+    attr_accessor :name,:opening_times,:directions,:payment_methods,:pricing,:website,:phone_number
+    attr_accessor :lat,:lng,:street,:district,:region,:city,:postal_code,:country
+    attr_accessor :tag_list,:created_at,:branded_tags
     
     class << self
       def suggested(opts={})
@@ -24,6 +25,19 @@ module Whatser
       def delete(poi_id)
         api_request :delete, "/api/poi/#{poi_id}"
       end        
+    end
+    
+    def branded_tags=(val)
+      if val.is_a?(Array)
+        @branded_tags = []
+        val.each do |tag|
+          if tag.is_a?(Whatser::Tag)
+            @branded_tags << tag
+          else
+            @branded_tags << Resource.from_hash_to_model(tag, Whatser::Tag)
+          end
+        end
+      end
     end
     
     def save
@@ -49,14 +63,6 @@ module Whatser
     def media(opts={})
       Whatser::Media.list(id, opts)
     end
-    
-    def reviews(opts={})
-      Whatser::Review.set(self.class.client).list(id, opts)
-    end
-    
-    def details(opts={})
-      Whatser::Detail.set(self.class.client).list(id, opts)
-    end    
     
     def activity(opts)
       Whatser::ActivityFeed.set(self.class.client).spot( self.id, opts )

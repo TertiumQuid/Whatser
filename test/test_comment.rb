@@ -5,7 +5,20 @@ class TestComment < Test::Unit::TestCase
     @client = Whatser::Client.new
     @poi_id = 1
     @media_id = 1    
-    @comment = Whatser::Comment.new(:poi_id => @poi_id, :body => 'test')
+    @user_id = 1
+    @comment = Whatser::Comment.new(:poi_id => @poi_id, :body => 'test', :user_id => @user_id)
+  end
+  
+  def test_poi
+    assert @comment.poi.is_a?(Whatser::Response)
+    @comment.poi_id = nil
+    assert_nil @comment.poi
+  end
+  
+  def test_user
+    assert @comment.user.is_a?(Whatser::Response)
+    @comment.user_id = nil
+    assert_nil @comment.user
   end
   
   def test_poi_list

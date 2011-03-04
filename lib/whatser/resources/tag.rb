@@ -2,6 +2,7 @@ module Whatser
   class Tag < Whatser::Resource
     attr_accessor :id,:poi_id
     attr_accessor :name
+    attr_accessor :web_list_pic,:web_detail_pic,:touch_list_pic,:touch_detail_pic,:wap_list_pic,:wap_detail_pic
     
     class << self
       def list(poi_id, opts={})
