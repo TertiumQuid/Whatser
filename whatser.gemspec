@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whatser}
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Travis Dunn"]
-  s.date = %q{2011-02-03}
+  s.date = %q{2011-03-04}
   s.description = %q{The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with Whatser's location-based web services (see http://docs.sogeoapi.com for more details).}
   s.email = %q{cmd@travisdunn.com}
   s.extra_rdoc_files = [
@@ -42,13 +42,10 @@ Gem::Specification.new do |s|
     "lib/whatser/resources/city.rb",
     "lib/whatser/resources/collection.rb",
     "lib/whatser/resources/comment.rb",
-    "lib/whatser/resources/data_source.rb",
-    "lib/whatser/resources/detail.rb",
     "lib/whatser/resources/follow.rb",
     "lib/whatser/resources/media.rb",
     "lib/whatser/resources/poi.rb",
     "lib/whatser/resources/resource.rb",
-    "lib/whatser/resources/review.rb",
     "lib/whatser/resources/subscription.rb",
     "lib/whatser/resources/tag.rb",
     "lib/whatser/resources/user.rb",
@@ -60,8 +57,6 @@ Gem::Specification.new do |s|
     "test/test_collection.rb",
     "test/test_comment.rb",
     "test/test_configuration.rb",
-    "test/test_data_source.rb",
-    "test/test_detail.rb",
     "test/test_facebook.rb",
     "test/test_follow.rb",
     "test/test_foursquare.rb",
@@ -72,7 +67,6 @@ Gem::Specification.new do |s|
     "test/test_poi.rb",
     "test/test_resource.rb",
     "test/test_response.rb",
-    "test/test_review.rb",
     "test/test_service.rb",
     "test/test_subscription.rb",
     "test/test_tag.rb",
@@ -94,8 +88,6 @@ Gem::Specification.new do |s|
     "test/test_collection.rb",
     "test/test_comment.rb",
     "test/test_configuration.rb",
-    "test/test_data_source.rb",
-    "test/test_detail.rb",
     "test/test_facebook.rb",
     "test/test_follow.rb",
     "test/test_foursquare.rb",
@@ -106,7 +98,6 @@ Gem::Specification.new do |s|
     "test/test_poi.rb",
     "test/test_resource.rb",
     "test/test_response.rb",
-    "test/test_review.rb",
     "test/test_service.rb",
     "test/test_subscription.rb",
     "test/test_tag.rb",
