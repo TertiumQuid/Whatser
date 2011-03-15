@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whatser}
-  s.version = "0.5.0"
+  s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Travis Dunn"]
-  s.date = %q{2011-03-04}
+  s.date = %q{2011-03-15}
   s.description = %q{The 'Whatser API' Gem is a simple Ruby / Rails wrapper for interacting with Whatser's location-based web services (see http://docs.sogeoapi.com for more details).}
   s.email = %q{cmd@travisdunn.com}
   s.extra_rdoc_files = [
