@@ -10,6 +10,10 @@ module Whatser
         api_request :get, "/api/follows", {:query => opts}
       end
       
+      def followers(id, opts={})
+        api_request :get, "/api/users/#{id}/followers", {:query => opts}
+      end      
+      
       def suggested(opts={})
         api_request :get, "/api/users/suggested", {:query => opts}
       end        

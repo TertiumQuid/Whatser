@@ -57,6 +57,10 @@ module Whatser
       Whatser::Follow.set(self.class.client).connection(id)
     end 
     
+    def followers(params={})
+      Whatser::Follow.set(self.class.client).followers(id, params)
+    end    
+    
     def thanks(poi_id,params={})
       api_request :post, "/api/users/#{id}/poi/#{poi_id}/thanks", {:query => params}
     end

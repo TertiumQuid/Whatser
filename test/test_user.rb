@@ -53,6 +53,10 @@ class TestUser < Test::Unit::TestCase
   def test_connection
     assert @user.connection.is_a?(Whatser::Response)
   end  
+  
+  def test_followers
+    assert @user.followers.is_a?(Whatser::Response)
+  end  
 
   def test_thanks
     assert @user.thanks(1, :opt => 'test').is_a?(Whatser::Response)

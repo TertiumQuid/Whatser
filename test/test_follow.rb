@@ -11,6 +11,10 @@ class TestFollow < Test::Unit::TestCase
     assert @client.follows.list(:page => 1).is_a?(Whatser::Response)
   end
   
+  def test_followers
+    assert @client.follows.followers(@user_id, :page => 1).is_a?(Whatser::Response)
+  end  
+  
   def test_suggested
     assert @client.follows.suggested(:page => 1).is_a?(Whatser::Response)
   end  
