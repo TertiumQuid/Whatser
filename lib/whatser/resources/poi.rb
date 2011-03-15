@@ -71,6 +71,14 @@ module Whatser
     def comments(opts={})
       Whatser::Comment.set(self.class.client).poi(id, opts)
     end
+    
+    def visitors(opts={})
+      Whatser::User.set(self.class.client).visitors(id, opts)
+    end
+    
+    def collectors(opts={})
+      Whatser::User.set(self.class.client).collectors(id, opts)
+    end    
         
     def foursquare_connected?
       !foursquare_id.blank?

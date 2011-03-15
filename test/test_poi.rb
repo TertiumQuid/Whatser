@@ -81,6 +81,14 @@ class TestPoi < Test::Unit::TestCase
     assert @poi.comments(:opt => 'test').is_a?(Whatser::Response)
   end   
   
+  def test_visitors
+    assert @poi.visitors.is_a?(Whatser::Response)
+  end
+  
+  def test_collectors
+    assert @poi.collectors.is_a?(Whatser::Response)
+  end  
+  
   def branded_tags
     @poi.branded_tags = nil
     assert_nil @poi.branded_tags

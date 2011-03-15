@@ -35,6 +35,14 @@ module Whatser
       def invite(emails)
         api_request :post, "/api/invites", {:query => {'emails' => emails} }
       end
+      
+      def visitors(id, params={})
+        api_request :get, "/api/poi/#{id}/visitors", {:query => params}
+      end      
+
+      def collectors(id, params={})
+        api_request :get, "/api/poi/#{id}/collectors", {:query => params}
+      end      
     end      
 
     def save

@@ -22,6 +22,14 @@ class TestUser < Test::Unit::TestCase
     assert @client.users.suggested.is_a?(Whatser::Response)
   end  
   
+  def test_visitors
+    assert @client.users.visitors(1).is_a?(Whatser::Response)
+  end
+  
+  def test_collectors
+    assert @client.users.collectors(1).is_a?(Whatser::Response)
+  end    
+  
   def test_find
     assert @client.users.find(1, :opt => 'test').is_a?(Whatser::Response)
   end
